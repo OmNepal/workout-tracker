@@ -12,6 +12,7 @@ const requiredEntriesArray = document.querySelectorAll('.js-add-workout-entry')
 
 let workoutDataArray = []
 let isEmpty;
+let workoutNotesValue = '';
 
 addWorkoutButton.addEventListener('click', () => {
 
@@ -27,7 +28,7 @@ addWorkoutButton.addEventListener('click', () => {
     <td>${numberOfSetsElement.value}</td>
     <td>${workoutDate.value}</td>
     <td class="table-paragraph">
-      ${workoutNotes.value}
+      ${checkNotesEmpty()}
     </td>
     `
     clearEntryFields()
@@ -56,13 +57,18 @@ function checkForEmptyFields() {
     return false
   }
 }
+
+function checkNotesEmpty() {
+  workoutNotesValue = workoutNotes.value? workoutNotes.value : '-'
+  return workoutNotesValue;
+}
   
 function createWorkoutDataArray() {
   workoutDataArray.push({
     name: workoutNameElement.value,
     sets: numberOfSetsElement.value,
     date: workoutDate.value,
-    notes: workoutNotes.value
+    notes: checkNotesEmpty()
   })
 
   return workoutDataArray;
