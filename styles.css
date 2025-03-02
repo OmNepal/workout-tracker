@@ -68,6 +68,10 @@
   border-width: 2px;
 }
 
+.workout-entry-error{
+  border-color: red;
+}
+
 .add-workout-entry-notes {
   flex: none;
   height: 45px;
@@ -80,6 +84,10 @@
   background-color: rgb(121, 200, 4);
   border-width: 1px;
   cursor: pointer;
+}
+
+.error-message {
+  color: red;
 }
 
 .add-workout-button:hover {
