@@ -24,24 +24,30 @@
         <div class="add-workout-entries">
           <input
             type="text"
-            class="add-workout-entry"
+            class="add-workout-entry js-workout-name"
             placeholder="Workout Name"
           />
           <input
             type="text"
-            class="add-workout-entry"
+            class="add-workout-entry js-number-of-sets"
             placeholder="Number of sets"
           />
-          <input type="date" class="add-workout-entry" placeholder="Date" />
+          <input
+            type="date"
+            class="add-workout-entry js-workout-date"
+            placeholder="Date"
+          />
         </div>
 
         <input
           type="text"
-          class="add-workout-entry-notes"
+          class="add-workout-entry-notes js-workout-notes"
           placeholder="Notes..."
         />
 
-        <button class="add-workout-button">Add Workout</button>
+        <button class="add-workout-button js-add-workout-button">
+          Add Workout
+        </button>
       </div>
     </div>
 
@@ -57,32 +63,14 @@
           <th>Date</th>
           <th>Notes</th>
         </tr>
-        <tr>
-          <td>Benchpress</td>
-          <td>3</td>
-          <td>March 1, 2025</td>
-          <td class="table-paragraph">
-            did 12, 10, 8 reps on 3 sets, weight was 90lbs, 100lbs, 105lbs
-          </td>
-        </tr>
-        <tr>
-          <td>Squats</td>
-          <td>4</td>
-          <td>March 1, 2025</td>
-          <td>hit PR with 210 lbs</td>
-        </tr>
-        <tr>
-          <td>Lat Pulldown</td>
-          <td>3</td>
-          <td>March 1, 2025</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>Shoulder Press</td>
-          <td>2</td>
-          <td>March 1, 2025</td>
-          <td>-</td>
-        </tr>
+        <tbody class="js-workout-table-body">
+          <tr>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
       </table>
     </div>
 
