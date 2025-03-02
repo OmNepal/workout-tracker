@@ -14,10 +14,24 @@
   display: flex;
   flex-direction: row;
   flex: 1;
+  justify-content: flex-end;
+  column-gap: 10px;
+  padding-right: 15px;
+  cursor: pointer;
 }
 
 .nav-bar-item {
-  flex: 1;
+  padding: 10px;
+}
+
+.nav-bar-item:hover {
+  background-color: rgb(43, 43, 94);
+}
+
+.nav-bar a,
+.nav-bar a:visited {
+  color: white;
+  text-decoration: none;
 }
 
 .website-name {
