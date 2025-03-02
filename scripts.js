@@ -1,3 +1,4 @@
+
 const addWorkoutButton = document.querySelector('.js-add-workout-button');
 const workoutNameElement = document.querySelector('.js-workout-name')
 const numberOfSetsElement = document.querySelector('.js-number-of-sets')
@@ -10,33 +11,42 @@ const errorMessageElement = document.querySelector('.js-error-message')
 
 const requiredEntriesArray = document.querySelectorAll('.js-add-workout-entry')
 
-let workoutDataArray = []
 let isEmpty;
 let workoutNotesValue = '';
+
+let workoutDataArray = JSON.parse(localStorage.getItem('workoutDataArray')) || [];
+workoutDataArray.forEach((localWorkoutData) => {
+  displayWorkoutDataHtml(localWorkoutData)
+})
 
 addWorkoutButton.addEventListener('click', () => {
 
   isEmpty = checkForEmptyFields()
 
   if (!isEmpty) {
-    const workoutDataArray = createWorkoutDataArray();
+    workoutDataArray = createWorkoutDataArray();
     console.log(workoutDataArray)
-    workoutTableInitialRow.innerHTML = ''
 
+    const latestWorkoutData = workoutDataArray[workoutDataArray.length-1]
+
+    saveToStorage(workoutDataArray);
+
+    displayWorkoutDataHtml(latestWorkoutData)
+    clearEntryFields()
+  }
+  })
+
+  function displayWorkoutDataHtml(latestWorkoutData) {
+    workoutTableInitialRow.innerHTML = ''
     workoutTableBodyElement.innerHTML += `
-    <td>${workoutNameElement.value}</td>
-    <td>${numberOfSetsElement.value}</td>
-    <td>${workoutDate.value}</td>
+    <td>${latestWorkoutData.name}</td>
+    <td>${latestWorkoutData.sets}</td>
+    <td>${latestWorkoutData.date}</td>
     <td class="table-paragraph">
       ${checkNotesEmpty()}
     </td>
     `
-    clearEntryFields()
   }
-
-  
-
-  })
   
 function checkForEmptyFields() {
   if (workoutNameElement.value === '' || numberOfSetsElement.value === '' || workoutDate.value === '') {
@@ -72,6 +82,10 @@ function createWorkoutDataArray() {
   })
 
   return workoutDataArray;
+}
+
+function saveToStorage(workoutDataArray) {
+  localStorage.setItem('workoutDataArray', JSON.stringify(workoutDataArray))
 }
 
 function clearEntryFields() {
