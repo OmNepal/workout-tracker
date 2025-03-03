@@ -5,11 +5,9 @@ const workoutNameElement = document.querySelector('.js-workout-name')
 const numberOfSetsElement = document.querySelector('.js-number-of-sets')
 const workoutDate = document.querySelector('.js-workout-date')
 const workoutNotes = document.querySelector('.js-workout-notes')
-
-console.log(workoutNotes)
 const workoutTableInitialRow = document.querySelector('.js-workout-table-inital-row')
 const workoutTableBodyElement = document.querySelector('.js-workout-table-body')
-console.log(workoutTableBodyElement)
+
 
 const errorMessageElement = document.querySelector('.js-error-message')
 
