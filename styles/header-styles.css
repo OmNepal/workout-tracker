@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  flex-direction: row;
+
+  flex: 1;
+  background-color: rgb(13, 13, 59);
+  color: white;
+  height: 50px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.website-name {
+  font-size: 25px;
+  font-family: monospace;
+  flex: auto;
+  padding-left: 20px;
+  text-align: center;
+  flex: 2;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: flex-end;
+  column-gap: 10px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+.nav-bar-item {
+  padding: 10px;
+}
+
+.nav-bar-item:hover {
+  background-color: rgb(43, 43, 94);
+}
+
+.nav-bar a,
+.nav-bar a:visited {
+  color: white;
+  text-decoration: none;
+}
