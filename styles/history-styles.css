@@ -7,30 +7,45 @@ body {
   text-align: center;
 }
 
-.workout-history-grid {
+.workout-history {
+  /*
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  text-align: center;
-  place-items: center;
+  */
+  display: flex;
+  flex-direction: column;
+
+
   column-gap: 25px;
-  row-gap: 25px;
+  row-gap: 15px;
   font-size: 17px;
 }
 
 .workout-history-of-day {
-  width: fit-content;
-  padding: 20px;
+  flex: 1;
+  padding: 10px;
   background-color: aliceblue;
-  border-radius: 50px;
+  border-radius: 20px;
+  margin: 0px 150px;
 }
 
 .workout-date {
-  font-size: 20px;
+  font-size: 16px;
+  margin: 8px;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   text-decoration: underline;
 }
 
+.workouts-grid {
+  margin-left: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 8px;
+  padding-bottom: 8px;
+}
+
 .workout-summary {
+  padding-top: 12px;
   font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   
