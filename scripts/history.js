@@ -1,97 +1,92 @@
 import {getWorkoutDataArray} from './scripts.js';
-console.log(getWorkoutDataArray())
-
-const workoutDataArray = getWorkoutDataArray();
 
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
-const today = dayjs()
-const yesterday = dayjs().subtract(1, 'day')
-console.log(today, yesterday)
+const today = dayjs().format('MMMM D, YYYY')
+const yesterday = dayjs().subtract(1, 'day').format('MMMM D, YYYY')
 
-let todayWorkoutData = []
-let yesterdayWorkoutData = []
+const workoutHistoryElement = document.querySelector('.js-workout-history')
 
-todayWorkoutData = workoutDataArray.filter((workoutData, index) => {
-  let result = workoutData.date === today.format('YYYY-MM-DD')
+let workoutDataArray = getWorkoutDataArray();
 
-  return result
+if (workoutDataArray.length === 0) {
+  workoutHistoryElement.innerHTML = `
+  <p class = "no-workouts-message"> 
+  You have not added any workouts yet. Add Workouts in the Home page. 
+  </p>
+  `
+}
+
+workoutDataArray.sort((a,b) => {
+  return dayjs(b.date).diff(dayjs(a.date))
 })
+console.log(workoutDataArray)
 
-yesterdayWorkoutData = workoutDataArray.filter((workoutData) => {
-  return workoutData.date === yesterday.format('YYYY-MM-DD')
-})
+let sortedWorkoutObject = {}
 
-const workoutHistoryElement = document.querySelector('.workout-history')
-workoutHistoryElement.innerHTML = `
-  ${genrateTodayWorkoutHtml()}
-  ${genrateYesterdayWorkoutHtml()}
-`
+const workoutsGroupedByDate = workoutDataArray.reduce((groups, currentWorkout) => {
 
-/*
-workoutDataArray.forEach((workoutData) => {
- while(workoutData.date !== today.format('YYYY-MM-DD') && 
- workoutData.date !== yesterday.format('YYYY-MM-DD')) {
-  console.log(workoutData)
-  
-  workoutHistoryElement.innerHTML +=`
+  let newFormatDate = dayjs(currentWorkout.date).format('MMMM D, YYYY')
+
+  sortedWorkoutObject = groups.find((sortedWorkoutObject) => {
+    return sortedWorkoutObject['date'] === newFormatDate
+  })
+
+  if (sortedWorkoutObject) {
+    sortedWorkoutObject['workouts'].push(currentWorkout);
+  } else {
+    sortedWorkoutObject = {}
+    sortedWorkoutObject['date'] = newFormatDate
+    if(!(sortedWorkoutObject['workouts'])) {
+      sortedWorkoutObject['workouts'] = []
+    }
+    sortedWorkoutObject['workouts'].push(currentWorkout);
+    groups.push(sortedWorkoutObject);
+  }
+  return groups;
+}, [])
+
+console.log(workoutsGroupedByDate)
+
+workoutsGroupedByDate.forEach((workoutGroup) => {
+
+  workoutHistoryElement.innerHTML += `
   <div class="workout-history-of-day">
-  <p>Days Before Yesterday</p>
-  <p class="workout-date">${workoutData.date}</p>
+  <p class="workout-date">${checkTodayYesterday(workoutGroup.date)}</p>
   <div class="workouts-grid">
-    <div>${workoutData.name} (${workoutData.sets}x) (${workoutData.date})</div>
-
+    ${displayWorkoutNames(workoutGroup)}
+  </div>
+  <a href="summary-suggestions.html" class="workout-summary"
+    >Summary & Suggestions</a
+  >
 </div>
   `
- }
 
-});
-*/
+})
 
+function displayWorkoutNames(workoutGroup) {
+  let workoutNamesHtml = '';
+  let workoutsArray = workoutGroup.workouts
+  workoutsArray.forEach((workout) => {
+    workoutNamesHtml += `
+    <div>${workout.name} (${workout.sets}x)</div>
+    `
+  })
 
-console.log(todayWorkoutData)
-console.log(yesterdayWorkoutData)
-
-function genrateTodayWorkoutHtml() {
-  let todayWorkoutHtml = `<div class="workout-history-of-day">
-  <p class="workout-date">${today.format('MMMM D, YYYY')} (Today)</p>
-  <div class="workouts-grid">`
-
-
-  todayWorkoutData.forEach((todayWorkoutData) => {
-    todayWorkoutHtml += 
-     `
-      <div>${todayWorkoutData.name} (${todayWorkoutData.sets}x)</div>   
-  `
-  } )
-
-  todayWorkoutHtml += `</div>
-  <a href="summary-suggestions.html" class="workout-summary"
-  >Summary & Suggestions</a
-> </div>`
-
-return todayWorkoutHtml;
-
+  return workoutNamesHtml;
 }
 
-function genrateYesterdayWorkoutHtml() {
-  let yesterdayWorkoutHtml = `<div class="workout-history-of-day">
-  <p class="workout-date">${yesterday.format('MMMM D, YYYY')} (Yesterday)</p>
-  <div class="workouts-grid">`
-
-
-  yesterdayWorkoutData.forEach((yesterdayWorkoutData) => {
-    yesterdayWorkoutHtml += 
-     `
-      <div>${yesterdayWorkoutData.name} (${yesterdayWorkoutData.sets}x)</div>   
-  `
-  } )
-
-  yesterdayWorkoutHtml += `</div>
-  <a href="summary-suggestions.html" class="workout-summary"
-  >Summary & Suggestions</a
-> </div>`
-
-return yesterdayWorkoutHtml;
-
+function checkTodayYesterday(date) {
+  if (date === today) {
+    return `${date} (Today)`
+  }
+  else if (date === yesterday) {
+    return `${date} (Yesterday)`
+  }
+  else return date;
 }
+
+
+
+
+
 

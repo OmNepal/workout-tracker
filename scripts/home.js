@@ -47,13 +47,13 @@ addWorkoutButton.addEventListener('click', () => {
     <td>${latestWorkoutData.sets}</td>
     <td>${latestWorkoutData.date}</td>
     <td class="table-paragraph">
-      ${checkNotesEmpty()}
+      ${checkNotesEmpty(latestWorkoutData)}
     </td>
     `
   }
 
-  function checkNotesEmpty() {
-    workoutNotesValue = workoutNotes.value? workoutNotes.value : '-'
+  function checkNotesEmpty(workoutData) {
+    workoutNotesValue = workoutData.notes? workoutData.notes : '-'
     return workoutNotesValue;
     }
 
@@ -89,7 +89,7 @@ addWorkoutButton.addEventListener('click', () => {
           name: workoutNameElement.value,
           sets: numberOfSetsElement.value,
           date: workoutDate.value,
-          notes: checkNotesEmpty()
+          notes: workoutNotes.value
         })
         return workoutDataArray;
         }

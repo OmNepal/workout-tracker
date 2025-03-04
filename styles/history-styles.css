@@ -1,10 +1,11 @@
-body {
+.history-body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .header-text {
   font-size: 24px;
   text-align: center;
+  font-weight: bold;
 }
 
 .workout-history {
@@ -19,6 +20,11 @@ body {
   column-gap: 25px;
   row-gap: 15px;
   font-size: 17px;
+}
+
+.no-workouts-message {
+  text-align: center;
+  font-size: 25px;
 }
 
 .workout-history-of-day {
