@@ -55,8 +55,8 @@ workoutsGroupedByDate.forEach((workoutGroup) => {
   <div class="workouts-grid">
     ${displayWorkoutNames(workoutGroup)}
   </div>
-  <a href="summary-suggestions.html" class="workout-summary"
-    >Summary & Suggestions</a
+  <a href="summary.html" class="workout-summary"
+    >Summary</a
   >
 </div>
   `
