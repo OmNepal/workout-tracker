@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+    <link rel="stylesheet" href="styles/header-styles.css" />
+    <link rel="stylesheet" href="styles/history-styles.css" />
+  </head>
+  <body>
+    <%- include('includes/header') %>
+
+    <div class="history-body">
+      <p class="header-text">Your Workout History</p>
+      <ul class="workout-history js-workout-history">
+        <% if (groupedWorkoutsArray.length === 0) { %>
+        <h1>
+          You hae not added any workouts yet. Add Workouts from the Home Page.
+        </h1>
+        <% } %> <% for (workoutGroup of groupedWorkoutsArray) { %>
+        <li class="workout-history-of-day">
+          <p class="workout-date"><%= workoutGroup.date %></p>
+          <div class="workouts-grid">
+            <% for (workout of workoutGroup.workouts) {%>
+            <div><%= workout.name %></div>
+            <% } %>
+          </div>
+          <div class="workout-actions">
+            <a href="/history/<%=workoutGroup.date%>">Details</a>
+            <a href="/review">Review</a>
+          </div>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+
+    <script type="module" src="scripts/histry.js"></script>
+  </body>
+</html>

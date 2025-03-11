@@ -3,6 +3,8 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 
+const workoutData = require(path.join(__dirname, 'util', 'workouts-data.js'))
+
 const app = express()
 
 app.set('views', path.join(__dirname, 'views'))
@@ -41,33 +43,46 @@ app.post('/', function (req, res) {
     workoutDetail.description = '-'
   }
 
-  const filePath = path.join(__dirname, 'data', 'workouts.json')
-
-  const fileData = fs.readFileSync(filePath)
-  const workoutsArray = JSON.parse(fileData)
+  const workoutsArray = workoutData.getStoredWorkouts()
 
   workoutsArray.push(workoutDetail)
 
-  fs.writeFileSync(filePath, JSON.stringify(workoutsArray))
+  workoutData.storeWorkouts(workoutsArray)
 
-  /*
-  let workoutDetailRow;
-  workoutDetailRow += `
-  <tr>
-  <td>${workoutDetail.name}</td>
-  <td>${workoutDetail.sets}</td>
-  <td>${workoutDetail.date}</td>
-  <td>${workoutDetail.description}</td>
-</tr>
-  `
-  */
   res.render('index', {
     workoutsArray: workoutsArray
   })
 })
 
 app.get('/history', function (req, res) {
-  const filePath = path.join(__dirname,'views', 'history.html')
+  const workoutsArray = workoutData.getStoredWorkouts();
+
+  const groupedWorkoutsArray = workoutData.getGroupedWorkouts(workoutsArray);
+
+  res.render('history', {
+    groupedWorkoutsArray: groupedWorkoutsArray
+  })
+})
+
+app.get('/history/:id', function(req, res) {
+  const id = req.params.id
+
+  const workoutsArray = workoutData.getStoredWorkouts()
+  const groupedWorkoutsArray = workoutData.getGroupedWorkouts(workoutsArray)
+
+  const workoutDetails = groupedWorkoutsArray.find((workout) => {
+    return (workout.date === id) 
+  });
+
+  console.log(workoutDetails)
+
+  res.render('workout-details', {
+    workoutDetails: workoutDetails
+  })
+})
+
+app.get('/review', function (req, res) {
+  const filePath = path.join(__dirname,'views', 'review.html')
   res.sendFile(filePath)
 })
 

@@ -3,23 +3,17 @@
 }
 
 .header-text {
-  font-size: 24px;
+  font-size: 28px;
   text-align: center;
   font-weight: bold;
 }
 
 .workout-history {
-  /*
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  */
-  display: flex;
-  flex-direction: column;
-
-
-  column-gap: 25px;
-  row-gap: 15px;
-  font-size: 17px;
+    list-style: none;
+    margin: 2rem auto;
+    max-width: 60rem;
+    font-size: 18px;
+ 
 }
 
 .no-workouts-message {
@@ -28,19 +22,20 @@
 }
 
 .workout-history-of-day {
-  flex: 1;
-  padding: 10px;
-  background-color: aliceblue;
-  border-radius: 20px;
-  margin: 0px 150px;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background-color: rgb(234, 238, 242);
+
 }
 
 .workout-date {
   font-size: 16px;
-  margin: 8px;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-weight: bold;
-  /*text-decoration: underline;*/
+  margin-top: 0;
+
 }
 
 .workouts-grid {
@@ -51,9 +46,24 @@
   padding-bottom: 8px;
 }
 
-.workout-summary {
-  padding-top: 12px;
-  font-size: 14px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  
+.workout-actions{
+  text-align: right;
+}
+
+.workout-actions a {
+  padding-top: 1px;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif, Geneva, Tahoma, sans-serif;
+  text-decoration: none;
+
+  color: rgb(20, 52, 80);
+  margin-left: 5px;
+  background-color: rgb(139, 141, 142);
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.workout-actions a:hover {
+  background-color: rgb(57, 58, 58);
+  color: rgb(191, 214, 235);
 }

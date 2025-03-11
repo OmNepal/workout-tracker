@@ -8,6 +8,7 @@ const workoutHistoryElement = document.querySelector('.js-workout-history')
 
 let workoutDataArray = getWorkoutDataArray();
 
+/*
 if (workoutDataArray.length === 0) {
   workoutHistoryElement.innerHTML = `
   <p class = "no-workouts-message"> 
@@ -15,6 +16,7 @@ if (workoutDataArray.length === 0) {
   </p>
   `
 }
+*/
 
 workoutDataArray.sort((a,b) => {
   return dayjs(b.date).diff(dayjs(a.date))

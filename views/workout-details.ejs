@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+    <link rel="stylesheet" href="/styles/header-styles.css" />
+    <link rel="stylesheet" href="/styles/workout-details.css" />
+  </head>
+  <body>
+    <%- include('includes/header') %>
+
+    <div class="workout-details-body">
+      <p class="header-text">Your Workout Details</p>
+
+      <div class="workout-details">
+        <p class="workout-date"><%= workoutDetails.date %></p>
+        <ul class="workouts-list">
+          <% for (workout of workoutDetails.workouts) {%>
+          <li>
+            <div><span>Name:</span> <%=workout.name%>,</div>
+            <div><span>Sets:</span> <%=workout.sets%>,</div>
+            <div><span>Description:</span> <%=workout.description%></div>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+      <p class="back-to-history"><a href="/history">Back to History</a></p>
+    </div>
+
+    <script type="module" src="scripts/history.js"></script>
+  </body>
+</html>

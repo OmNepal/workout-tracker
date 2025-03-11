@@ -9,37 +9,18 @@
     <link rel="stylesheet" href="styles/home-styles.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="website-name">Personal Workout Tracker</div>
-      <div class="nav-bar">
-        <a href="/">
-          <div class="nav-bar-item">Home</div>
-        </a>
-
-        <a href="/workout">
-          <div class="nav-bar-item">Workouts</div>
-        </a>
-
-        <a href="/history">
-          <div class="nav-bar-item">History</div>
-        </a>
-
-        <a href="/profile">
-          <div class="nav-bar-item">Profile</div>
-        </a>
-      </div>
-    </header>
+    <%- include('includes/header') %>
 
     <div class="add-workout-form">
       <div class="add-workout-text">Add New Workout</div>
 
       <form action="/" method="POST">
         <div class="form-control">
-          <label for="name">Name</label>
+          <label for="name">Workout Name</label>
           <input type="text" name="name" id="name" required />
         </div>
         <div class="form-control">
-          <label for="sets">Sets</label>
+          <label for="sets">Number of Sets</label>
           <input type="text" name="sets" id="sets" required />
         </div>
         <div class="form-control">
