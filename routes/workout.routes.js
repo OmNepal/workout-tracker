@@ -1,14 +1,17 @@
 const express = require('express')
+const path = require('path')
+const fs = require('fs')
 
 const router = express.Router()
 
 router.get('/', function (req, res) {
 
-  const filePath = path.join(__dirname, 'data', 'workouts.json')
+  //const filePath = path.join(__dirname, 'data', 'workouts.json')
 
-  const fileData = fs.readFileSync(filePath)
-  const workoutsArray = JSON.parse(fileData)
+  //const fileData = fs.readFileSync(filePath)
+  //const workoutsArray = JSON.parse(fileData)
 
+  /*
   if (workoutsArray.length === 0) {
     workoutsArray.push({
       name: '-',
@@ -17,10 +20,12 @@ router.get('/', function (req, res) {
       description: '-'
     })
   }
+  
 
   res.render('index', {
     workoutsArray: workoutsArray
-  })
+  })*/
+  res.render('demo')
 })
 
 router.post('/', function (req, res) {

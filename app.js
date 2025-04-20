@@ -1,10 +1,18 @@
 const exp = require('constants')
 const express = require('express')
+const cookieParser = require('cookie-parser')
+
 const path = require('path')
 const fs = require('fs')
 
+const db = require('./data/database')
+
 const workoutData = require(path.join(__dirname, 'util', 'workouts-data.js'))
+
+const checkAuthMiddleware = require('./middlewares/check-auth')
+
 const workoutRoutes = require('./routes/workout.routes')
+const authRoutes = require('./routes/auth.routes')
 
 const app = express()
 
@@ -14,6 +22,11 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
 app.use(express.static('public'))
+app.use(cookieParser())
+
+app.use(authRoutes)
+
+app.use(checkAuthMiddleware)
 
 app.use(workoutRoutes)
 
@@ -59,4 +72,8 @@ app.get('/profile', function (req, res) {
   res.sendFile(filePath)
 })
 
-app.listen(3000)
+db.connectToDatabase().then(() => {
+  app.listen(3000)
+}).catch((error) => {
+  console.log('Failed to connect to the database')
+})

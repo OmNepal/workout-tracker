@@ -16,5 +16,11 @@
     <a href="/profile">
       <div class="nav-bar-item">Profile</div>
     </a>
+
+    <% if (locals.isAuth) { %>
+      <a href="/logout">
+        <div class="nav-bar-item">Logout</div>
+      </a>
+    <% } %>
   </div>
 </header>
